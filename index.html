@@ -57,7 +57,7 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
       min-width: 0;
     }
 
@@ -65,12 +65,14 @@
       height: 56px;
       width: auto;
       display: block;
+      object-fit: contain;
     }
 
     .brand-text {
       font-weight: 800;
       letter-spacing: 0.01em;
       white-space: nowrap;
+      font-size: 18px;
     }
 
     .nav {
@@ -131,6 +133,7 @@
       width: auto;
       display: block;
       margin-bottom: 20px;
+      object-fit: contain;
       filter: drop-shadow(0 8px 22px rgba(0,0,0,0.24));
     }
 
@@ -474,20 +477,7 @@
     }
 
     .summary-box {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      padding: 18px 20px;
-      border-radius: 18px;
-      background: #fff9f3;
-      border: 1px solid #ffe3c0;
-    }
-
-    .summary-box strong {
-      font-size: 32px;
-      letter-spacing: -0.02em;
-      color: var(--primary-dark);
+      display: none;
     }
 
     .note {
@@ -535,10 +525,6 @@
     @media (max-width: 680px) {
       .nav { display: none; }
       .grid-2 { grid-template-columns: 1fr; }
-      .summary-box {
-        flex-direction: column;
-        align-items: flex-start;
-      }
       .hero-actions { flex-direction: column; }
       .btn { width: 100%; }
       .hero-logo { height: 68px; }
@@ -551,7 +537,7 @@
   <header class="topbar">
     <div class="wrap topbar-inner">
       <a class="brand" href="#top">
-        <img src="logo.png" alt="Arcalinkロゴ" class="brand-logo" />
+        <img src="arcalogo.png" alt="Arcalinkロゴ" class="brand-logo" />
         <span class="brand-text">リサイクルゴミ袋</span>
       </a>
       <nav class="nav">
@@ -567,7 +553,7 @@
     <div class="wrap hero-grid">
       <div>
         <div class="kicker">オレンジ × ブラック / 法人向けケース販売</div>
-        <img src="logo.png" alt="Arcalinkロゴ" class="hero-logo" />
+        <img src="arcalogo.png" alt="Arcalinkロゴ" class="hero-logo" />
         <h1>現場で使いやすい。<br>ブランド感のある<br>リサイクルゴミ袋サイト。</h1>
         <p>
           Arcalinkのテーマカラーであるオレンジとブラックを基調に、法人向けらしい力強さと見やすさを両立したデザインです。
@@ -642,10 +628,6 @@
               <span>・色：半透明</span>
               <span>・用途：事業所・現場ゴミの回収</span>
             </div>
-            <div class="price">
-              <small>ケース単価</small>
-              <strong>¥3,000</strong>
-            </div>
           </div>
         </article>
 
@@ -660,10 +642,6 @@
               <span>・色：黒</span>
               <span>・用途：現場廃材・混合ゴミ向け</span>
             </div>
-            <div class="price">
-              <small>ケース単価</small>
-              <strong>¥4,500</strong>
-            </div>
           </div>
         </article>
 
@@ -677,10 +655,6 @@
               <span>・容量：90L</span>
               <span>・色：半透明</span>
               <span>・用途：大量回収・拠点運用</span>
-            </div>
-            <div class="price">
-              <small>ケース単価</small>
-              <strong>¥5,500</strong>
             </div>
           </div>
         </article>
@@ -794,14 +768,6 @@
             </div>
           </div>
 
-          <div class="summary-box">
-            <div>
-              <div class="small">ご注文金額（税抜）</div>
-              <strong id="totalDisplay">¥0</strong>
-            </div>
-            <div class="small">送信後、会社へ通知メールが届きます。</div>
-          </div>
-
           <input type="hidden" id="totalAmount" name="totalAmount" value="0" />
           <button type="submit" class="btn btn-primary">注文を送信する</button>
           <div class="note">※ サンプルサイトのため、価格や仕様は仮設定です。実運用前に内容をご確認ください。</div>
@@ -831,7 +797,6 @@
     const unitPrice = document.getElementById("unitPrice");
     const quantity = document.getElementById("quantity");
     const totalAmount = document.getElementById("totalAmount");
-    const totalDisplay = document.getElementById("totalDisplay");
 
     function updatePrice() {
       const selectedProduct = productName.value;
@@ -841,7 +806,6 @@
 
       unitPrice.value = price;
       totalAmount.value = total;
-      totalDisplay.textContent = "¥" + total.toLocaleString();
     }
 
     productName.addEventListener("change", updatePrice);
