@@ -6,52 +6,56 @@
   <title>Arcalink リサイクルゴミ袋</title>
   <style>
     :root {
-      --bg: #f6f6f6;
-      --card: #ffffff;
-      --text: #151515;
-      --sub: #555555;
-      --line: #e7e7e7;
-      --primary: #ff8a00;
-      --primary-dark: #e87700;
-      --black: #111111;
-      --accent: #fff3e4;
-      --shadow: 0 14px 36px rgba(0, 0, 0, 0.08);
-      --radius: 22px;
+      --bg: #070707;
+      --bg-2: #111111;
+      --panel: rgba(255,255,255,0.06);
+      --panel-2: rgba(255,255,255,0.04);
+      --text: #ffffff;
+      --sub: rgba(255,255,255,0.72);
+      --line: rgba(255,255,255,0.10);
+      --orange: #ff7a00;
+      --orange-2: #ff9d2f;
+      --shadow: 0 24px 60px rgba(0,0,0,0.38);
+      --radius: 24px;
+      --max: 1200px;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255,122,0,0.20), transparent 24%),
+        radial-gradient(circle at 100% 20%, rgba(255,122,0,0.10), transparent 20%),
+        linear-gradient(180deg, #090909 0%, #070707 40%, #0f0f0f 100%);
       color: var(--text);
-      background: var(--bg);
       line-height: 1.7;
+      overflow-x: hidden;
     }
 
     a { color: inherit; text-decoration: none; }
 
     .wrap {
-      width: min(1180px, calc(100% - 32px));
+      width: min(var(--max), calc(100% - 32px));
       margin: 0 auto;
     }
 
     .topbar {
       position: sticky;
       top: 0;
-      z-index: 50;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+      z-index: 80;
+      backdrop-filter: blur(18px);
+      background: rgba(8,8,8,0.68);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
     .topbar-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 18px;
-      padding: 14px 0;
+      gap: 20px;
+      min-height: 84px;
     }
 
     .brand {
@@ -62,93 +66,115 @@
     }
 
     .brand-logo {
-      height: 56px;
+      height: 62px;
       width: auto;
       display: block;
-      object-fit: contain;
+      filter: drop-shadow(0 10px 20px rgba(255,122,0,0.18));
     }
 
     .brand-text {
-      font-weight: 800;
-      letter-spacing: 0.01em;
-      white-space: nowrap;
       font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .nav {
       display: flex;
-      gap: 20px;
+      gap: 22px;
       align-items: center;
-      color: var(--sub);
+      color: rgba(255,255,255,0.82);
       font-size: 14px;
       flex-wrap: wrap;
-      justify-content: flex-end;
     }
 
-    .nav a:hover { color: var(--primary-dark); }
+    .nav a {
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--orange), var(--orange-2));
+      transition: width .2s ease;
+    }
+
+    .nav a:hover::after { width: 100%; }
 
     .hero {
       position: relative;
+      padding: 72px 0 54px;
       overflow: hidden;
-      background:
-        radial-gradient(circle at top left, rgba(255,138,0,0.2), transparent 28%),
-        linear-gradient(135deg, #101010 0%, #1b1b1b 56%, #252525 100%);
-      color: #fff;
-      padding: 86px 0 72px;
     }
 
-    .hero::after {
+    .hero::before {
       content: "";
       position: absolute;
-      inset: auto -120px -120px auto;
-      width: 360px;
-      height: 360px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,138,0,0.22), transparent 62%);
+      inset: 0;
+      background:
+        linear-gradient(115deg, rgba(255,122,0,0.16), transparent 30%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 120px);
       pointer-events: none;
     }
 
     .hero-grid {
+      position: relative;
       display: grid;
       grid-template-columns: 1.08fr 0.92fr;
-      gap: 28px;
-      align-items: center;
+      gap: 26px;
+      align-items: stretch;
     }
 
-    .kicker {
+    .hero-copy,
+    .hero-side {
+      min-width: 0;
+    }
+
+    .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      border: 1px solid rgba(255,255,255,0.16);
+      gap: 10px;
+      padding: 10px 16px;
       border-radius: 999px;
+      border: 1px solid rgba(255,122,0,0.26);
+      background: rgba(255,122,0,0.10);
+      color: #ffd5af;
       font-size: 13px;
-      background: rgba(255,138,0,0.12);
+      letter-spacing: 0.04em;
       margin-bottom: 18px;
-      color: #ffd09a;
     }
 
     .hero-logo {
-      height: 88px;
+      height: 92px;
       width: auto;
       display: block;
       margin-bottom: 20px;
-      object-fit: contain;
-      filter: drop-shadow(0 8px 22px rgba(0,0,0,0.24));
+      filter: drop-shadow(0 14px 30px rgba(255,122,0,0.14));
     }
 
     h1 {
-      font-size: clamp(34px, 6vw, 64px);
-      line-height: 1.12;
-      margin: 0 0 18px;
-      letter-spacing: -0.03em;
+      margin: 0 0 16px;
+      font-size: clamp(44px, 7vw, 86px);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
     }
 
-    .hero p {
+    .headline-accent {
+      color: var(--orange);
+      text-shadow: 0 0 24px rgba(255,122,0,0.22);
+    }
+
+    .hero-copy p {
       margin: 0;
+      max-width: 760px;
       font-size: 18px;
-      color: rgba(255,255,255,0.88);
-      max-width: 700px;
+      color: var(--sub);
     }
 
     .hero-actions {
@@ -159,86 +185,141 @@
     }
 
     .btn {
+      min-height: 56px;
+      padding: 0 24px;
+      border-radius: 16px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 52px;
-      padding: 0 22px;
-      border-radius: 14px;
-      font-weight: 700;
+      font-weight: 800;
+      letter-spacing: 0.03em;
       border: 1px solid transparent;
-      transition: 0.2s ease;
       cursor: pointer;
-      font: inherit;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: #fff;
-      box-shadow: 0 14px 34px rgba(255, 138, 0, 0.28);
+      background: linear-gradient(135deg, var(--orange), var(--orange-2));
+      box-shadow: 0 18px 40px rgba(255,122,0,0.26);
     }
 
     .btn-secondary {
-      background: transparent;
-      border-color: rgba(255,255,255,0.18);
       color: #fff;
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
     }
 
-    .btn:hover { transform: translateY(-1px); }
-
-    .hero-card {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 28px;
-      padding: 24px;
-      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
-    }
-
-    .hero-card h3 {
-      margin: 0 0 12px;
-      font-size: 18px;
-      color: #fff;
-    }
-
-    .hero-points {
+    .hero-side {
       display: grid;
-      gap: 12px;
-      margin-top: 14px;
+      gap: 18px;
     }
 
-    .hero-point {
+    .hero-box {
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-box-top {
+      padding: 22px 24px 0;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
+      justify-content: space-between;
       gap: 12px;
-      padding: 14px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.05);
-      color: rgba(255,255,255,0.92);
     }
 
-    .hero-point b {
+    .hero-box-top strong {
+      font-size: 18px;
+    }
+
+    .signal {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--orange), var(--orange-2));
+      box-shadow: 0 0 18px rgba(255,122,0,0.4);
+      flex: 0 0 auto;
+    }
+
+    .hero-panel-list {
+      padding: 16px 18px 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .hero-panel-item {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 14px;
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .hero-panel-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(255,122,0,0.24), rgba(255,255,255,0.06));
+      color: #fff;
+      font-size: 24px;
+    }
+
+    .hero-panel-item b {
       display: block;
       margin-bottom: 2px;
-      color: #fff;
+      font-size: 18px;
     }
 
-    .section { padding: 76px 0; }
+    .hero-panel-item span {
+      color: rgba(255,255,255,0.72);
+      font-size: 14px;
+    }
+
+    .section {
+      padding: 92px 0;
+      position: relative;
+    }
 
     .section-head {
-      margin-bottom: 28px;
+      margin-bottom: 26px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
     }
 
     .section-head h2 {
-      margin: 0 0 10px;
-      font-size: clamp(28px, 4vw, 42px);
-      letter-spacing: -0.02em;
-      color: var(--black);
+      margin: 0;
+      font-size: clamp(30px, 4vw, 50px);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
     }
 
     .section-head p {
       margin: 0;
-      color: var(--sub);
       max-width: 760px;
+      color: var(--sub);
+    }
+
+    .tagline {
+      color: var(--orange-2);
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 12px;
     }
 
     .features {
@@ -249,45 +330,62 @@
 
     .feature,
     .product,
+    .step,
     .contact-card,
-    .form-card,
-    .step {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
+    .form-card {
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.10);
       box-shadow: var(--shadow);
     }
 
     .feature {
       padding: 24px;
+      min-height: 240px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature::after {
+      content: "";
+      position: absolute;
+      top: -40px;
+      right: -30px;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,122,0,0.22), transparent 68%);
     }
 
     .feature-icon {
-      width: 48px;
-      height: 48px;
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
       display: grid;
       place-items: center;
-      border-radius: 14px;
-      background: var(--accent);
-      color: var(--primary-dark);
-      font-size: 22px;
-      margin-bottom: 14px;
+      background: linear-gradient(135deg, var(--orange), #ffb347);
+      color: #fff;
+      font-size: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 10px 24px rgba(255,122,0,0.22);
     }
 
     .feature h3,
     .product h3,
+    .step h3,
     .contact-card h3,
-    .form-card h3,
-    .step h3 {
-      margin: 0 0 8px;
-      font-size: 20px;
-      color: var(--black);
+    .form-card h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing: -0.02em;
     }
 
     .feature p,
     .product p,
+    .step p,
     .contact-card p,
     .meta,
+    .note,
     .small {
       margin: 0;
       color: var(--sub);
@@ -303,53 +401,66 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      min-height: 100%;
     }
 
     .product-visual {
-      height: 184px;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.42), transparent 20%),
-        linear-gradient(135deg, #1b1b1b, #2d2d2d 70%, #4b4b4b);
+      position: relative;
+      height: 200px;
       display: grid;
       place-items: center;
-      font-size: 64px;
-      color: #ffb458;
+      background:
+        linear-gradient(160deg, rgba(255,122,0,0.22), transparent 35%),
+        linear-gradient(135deg, #171717, #0d0d0d 72%, #1f1f1f);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .product-visual::before {
+      content: "";
+      position: absolute;
+      inset: auto -30px -30px auto;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,122,0,0.32), transparent 70%);
+    }
+
+    .product-visual span {
+      font-size: 72px;
+      filter: drop-shadow(0 10px 22px rgba(255,122,0,0.16));
     }
 
     .product-body {
-      padding: 22px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
       flex: 1;
     }
 
     .badge {
       display: inline-flex;
-      align-items: center;
       width: fit-content;
-      padding: 6px 10px;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
       border-radius: 999px;
-      background: var(--accent);
-      color: var(--primary-dark);
+      background: rgba(255,122,0,0.10);
+      color: #ffcf9a;
+      border: 1px solid rgba(255,122,0,0.20);
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
     }
 
     .specs {
       display: grid;
       gap: 8px;
       margin-top: 4px;
+      color: rgba(255,255,255,0.74);
       font-size: 14px;
-      color: var(--sub);
-    }
-
-    .price {
-      display: none;
-    }
-
-    .price strong {
-      display: none;
     }
 
     .process {
@@ -359,73 +470,73 @@
     }
 
     .step {
-      padding: 22px;
+      padding: 24px;
       position: relative;
       overflow: hidden;
+      min-height: 220px;
     }
 
     .step::before {
       content: "";
       position: absolute;
       inset: 0 auto 0 0;
-      width: 5px;
-      background: linear-gradient(180deg, var(--primary), var(--primary-dark));
+      width: 6px;
+      background: linear-gradient(180deg, var(--orange), var(--orange-2));
     }
 
     .step-no {
-      display: inline-grid;
-      place-items: center;
-      width: 38px;
-      height: 38px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      background: var(--black);
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--orange), var(--orange-2));
       color: #fff;
-      font-weight: 800;
-      margin-bottom: 12px;
+      font-weight: 900;
+      box-shadow: 0 10px 22px rgba(255,122,0,0.24);
     }
 
     .order-section {
-      background: linear-gradient(180deg, #fff8f0, #f8f8f8);
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
+      padding-top: 96px;
+      padding-bottom: 96px;
     }
 
     .order-grid {
       display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
+      grid-template-columns: 0.9fr 1.1fr;
       gap: 24px;
       align-items: start;
     }
 
     .contact-card,
     .form-card {
-      padding: 26px;
-      border-radius: 28px;
+      padding: 28px;
     }
 
     .contact-list {
       display: grid;
       gap: 12px;
-      margin-top: 20px;
+      margin-top: 22px;
     }
 
     .contact-item {
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: #fff8f1;
-      border: 1px solid #ffe2bd;
+      border-radius: 18px;
+      padding: 16px 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
     }
 
     .contact-item b {
       display: block;
       margin-bottom: 3px;
-      color: var(--black);
+      color: #fff;
     }
 
     .order-form {
       display: grid;
       gap: 18px;
-      margin-top: 18px;
+      margin-top: 20px;
     }
 
     .grid-2 {
@@ -443,23 +554,26 @@
     .field.full { grid-column: 1 / -1; }
 
     label {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--black);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.92);
     }
 
     input,
     select,
     textarea {
       width: 100%;
-      border: 1px solid #d9d9d9;
-      border-radius: 14px;
-      min-height: 52px;
+      min-height: 54px;
       padding: 12px 14px;
-      font-size: 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      color: #fff;
       font: inherit;
-      background: #fff;
-      color: var(--text);
+      font-size: 16px;
+      transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
     }
 
     textarea {
@@ -468,68 +582,74 @@
       padding-top: 14px;
     }
 
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(255,255,255,0.34);
+    }
+
     input:focus,
     select:focus,
     textarea:focus {
       outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(255, 138, 0, 0.14);
+      border-color: rgba(255,122,0,0.55);
+      box-shadow: 0 0 0 4px rgba(255,122,0,0.12);
+      background: rgba(255,255,255,0.06);
     }
 
-    .summary-box {
-      display: none;
-    }
+    .summary-box { display: none; }
 
     .note {
       font-size: 13px;
-      color: var(--sub);
-      margin-top: -6px;
+      color: rgba(255,255,255,0.50);
     }
 
     .footer {
-      background: #111111;
-      color: rgba(255,255,255,0.86);
-      padding: 30px 0 34px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: #080808;
+      padding: 28px 0 34px;
+      color: rgba(255,255,255,0.80);
     }
 
     .footer-grid {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 14px;
+      justify-content: space-between;
+      gap: 16px;
       flex-wrap: wrap;
     }
 
-    .footer small { color: rgba(255,255,255,0.64); }
+    .footer small {
+      color: rgba(255,255,255,0.50);
+    }
 
     code {
-      background: #fff5e8;
-      color: #9a4d00;
+      background: rgba(255,122,0,0.10);
+      color: #ffc27a;
       padding: 2px 6px;
       border-radius: 8px;
-      font-size: 0.95em;
+      border: 1px solid rgba(255,122,0,0.16);
     }
 
     @media (max-width: 980px) {
       .hero-grid,
-      .order-grid,
       .features,
       .products,
-      .process {
+      .process,
+      .order-grid {
         grid-template-columns: 1fr;
       }
-
-      .hero { padding-top: 62px; }
     }
 
-    @media (max-width: 680px) {
+    @media (max-width: 760px) {
       .nav { display: none; }
       .grid-2 { grid-template-columns: 1fr; }
       .hero-actions { flex-direction: column; }
       .btn { width: 100%; }
-      .hero-logo { height: 68px; }
-      .brand-logo { height: 44px; }
-      .brand-text { font-size: 14px; }
+      .brand-logo { height: 48px; }
+      .hero-logo { height: 74px; }
+      .brand-text { font-size: 15px; }
+      h1 { font-size: clamp(40px, 15vw, 62px); }
+      .section { padding: 74px 0; }
     }
   </style>
 </head>
@@ -538,46 +658,52 @@
     <div class="wrap topbar-inner">
       <a class="brand" href="#top">
         <img src="arcalogo.png" alt="Arcalinkロゴ" class="brand-logo" />
-        <span class="brand-text">リサイクルゴミ袋</span>
+        <span class="brand-text">Recycle Bag</span>
       </a>
       <nav class="nav">
         <a href="#features">特徴</a>
         <a href="#products">商品一覧</a>
-        <a href="#flow">ご注文の流れ</a>
-        <a href="#order">ご注文</a>
+        <a href="#flow">導入フロー</a>
+        <a href="#order">注文</a>
       </nav>
     </div>
   </header>
 
   <section class="hero" id="top">
     <div class="wrap hero-grid">
-      <div>
-        <div class="kicker">オレンジ × ブラック / 法人向けケース販売</div>
+      <div class="hero-copy">
+        <div class="eyebrow">ORANGE × BLACK / B2B RECYCLE PRODUCT</div>
         <img src="arcalogo.png" alt="Arcalinkロゴ" class="hero-logo" />
-        <h1>現場で使いやすい。<br>ブランド感のある<br>リサイクルゴミ袋サイト。</h1>
+        <h1>RECYCLE<br><span class="headline-accent">BAG</span><br>FOR FIELD</h1>
         <p>
-          Arcalinkのテーマカラーであるオレンジとブラックを基調に、法人向けらしい力強さと見やすさを両立したデザインです。
-          再生プラスチックを活用した業務用ゴミ袋を、スマホでも見やすく掲載できます。
+          現場で映える。企業としても映える。Arcalinkのテーマカラーを軸に、
+          法人向けの強さとスピード感を前面に出した、攻めたデザインのリサイクルゴミ袋サイトです。
         </p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#order">注文フォームへ</a>
           <a class="btn btn-secondary" href="#products">商品を見る</a>
         </div>
       </div>
-      <div class="hero-card">
-        <h3>Arcalinkの見せ方</h3>
-        <div class="hero-points">
-          <div class="hero-point">
-            <div>🟧</div>
-            <div><b>ブランドカラー</b><span>オレンジとブラックで企業らしい力強さを表現</span></div>
+
+      <div class="hero-side">
+        <div class="hero-box">
+          <div class="hero-box-top">
+            <strong>Arcalink Impact</strong>
+            <span class="signal"></span>
           </div>
-          <div class="hero-point">
-            <div>♻️</div>
-            <div><b>再生材の価値訴求</b><span>環境配慮型製品としてストーリーを伝えやすい構成</span></div>
-          </div>
-          <div class="hero-point">
-            <div>🚚</div>
-            <div><b>実運用に拡張可能</b><span>注文受付から納品書作成まで後から接続しやすい</span></div>
+          <div class="hero-panel-list">
+            <div class="hero-panel-item">
+              <div class="hero-panel-icon">🟧</div>
+              <div><b>Brand First</b><span>オレンジとブラックで一目で印象に残る見せ方。</span></div>
+            </div>
+            <div class="hero-panel-item">
+              <div class="hero-panel-icon">♻️</div>
+              <div><b>Recycle Story</b><span>再生材活用の価値を商品ページでそのまま訴求。</span></div>
+            </div>
+            <div class="hero-panel-item">
+              <div class="hero-panel-icon">⚡</div>
+              <div><b>Fast Operation</b><span>注文受付から社内処理まで後から自動化可能。</span></div>
+            </div>
           </div>
         </div>
       </div>
@@ -587,24 +713,28 @@
   <section class="section" id="features">
     <div class="wrap">
       <div class="section-head">
-        <h2>選ばれる理由</h2>
-        <p>価格だけでなく、ブランド感、実用性、環境配慮をセットで見せることで、法人向け商品として印象に残りやすくしています。</p>
+        <div>
+          <div class="tagline">Why Arcalink</div>
+          <h2>選ばれる理由</h2>
+        </div>
+        <p>価格の安さではなく、見せ方・使いやすさ・環境配慮・法人向けの対応力をまとめて印象づける構成です。</p>
       </div>
+
       <div class="features">
         <article class="feature">
           <div class="feature-icon">🌱</div>
           <h3>環境配慮型</h3>
-          <p>再生プラスチックを活用した製品として、資源循環の取り組みを商品ページ上でも伝えられます。</p>
+          <p>再生プラスチックを活用し、資源循環の考え方を法人向け商材としてわかりやすく訴求できます。</p>
         </article>
         <article class="feature">
-          <div class="feature-icon">📦</div>
-          <h3>業務用に最適</h3>
-          <p>現場・工場・倉庫など、日常的に大量消費する現場を想定したケース単位の導線にしています。</p>
+          <div class="feature-icon">🏢</div>
+          <h3>BtoB特化</h3>
+          <p>現場・工場・倉庫など、日常的に使う拠点向けにケース単位で導入しやすい設計です。</p>
         </article>
         <article class="feature">
-          <div class="feature-icon">🖤</div>
-          <h3>ブランド感のある見た目</h3>
-          <p>オレンジとブラックで、Arcalinkらしい強さ・信頼感・視認性を意識したデザインです。</p>
+          <div class="feature-icon">🔥</div>
+          <h3>攻めたデザイン</h3>
+          <p>企業サイトとしての重厚感に、ブランドとしての勢いを乗せたビジュアルで差別化できます。</p>
         </article>
       </div>
     </div>
@@ -613,16 +743,20 @@
   <section class="section" id="products">
     <div class="wrap">
       <div class="section-head">
-        <h2>商品一覧</h2>
-        <p>まずはサンプル用の3商品です。あとからサイズ、厚み、色、ケース入数、商品画像を追加して広げられます。</p>
+        <div>
+          <div class="tagline">Lineup</div>
+          <h2>商品一覧</h2>
+        </div>
+        <p>まずはサンプル用の3商品構成です。ここに後からサイズや色、厚み、写真を追加して広げていけます。</p>
       </div>
+
       <div class="products">
         <article class="product">
-          <div class="product-visual">🗑️</div>
+          <div class="product-visual"><span>🗑️</span></div>
           <div class="product-body">
-            <span class="badge">標準タイプ</span>
+            <span class="badge">Standard</span>
             <h3>45L 半透明</h3>
-            <p>事務所や軽作業現場で使いやすいベーシックモデルです。</p>
+            <p>事務所や軽作業現場で使いやすい、ベーシックで扱いやすいモデルです。</p>
             <div class="specs">
               <span>・容量：45L</span>
               <span>・色：半透明</span>
@@ -632,11 +766,11 @@
         </article>
 
         <article class="product">
-          <div class="product-visual">♻️</div>
+          <div class="product-visual"><span>♻️</span></div>
           <div class="product-body">
-            <span class="badge">現場向け</span>
+            <span class="badge">Field Type</span>
             <h3>70L 黒</h3>
-            <p>建設現場や作業場向けの、扱いやすい定番サイズです。</p>
+            <p>建設現場や作業場で使いやすい、定番サイズの法人向けモデルです。</p>
             <div class="specs">
               <span>・容量：70L</span>
               <span>・色：黒</span>
@@ -646,11 +780,11 @@
         </article>
 
         <article class="product">
-          <div class="product-visual">🏭</div>
+          <div class="product-visual"><span>🏭</span></div>
           <div class="product-body">
-            <span class="badge">大容量</span>
+            <span class="badge">Heavy Use</span>
             <h3>90L 半透明</h3>
-            <p>倉庫・工場・大型施設の運用に向いた大容量タイプです。</p>
+            <p>倉庫・工場・大型施設での運用に向いた、大容量タイプのモデルです。</p>
             <div class="specs">
               <span>・容量：90L</span>
               <span>・色：半透明</span>
@@ -665,29 +799,33 @@
   <section class="section" id="flow">
     <div class="wrap">
       <div class="section-head">
-        <h2>ご注文の流れ</h2>
-        <p>このデザインのまま、あとから注文受付、メール通知、納品書PDF自動作成まで接続できます。</p>
+        <div>
+          <div class="tagline">Flow</div>
+          <h2>導入フロー</h2>
+        </div>
+        <p>このデザインのまま、あとから注文受付・メール通知・納品書PDF自動作成まで接続できます。</p>
       </div>
+
       <div class="process">
         <article class="step">
           <div class="step-no">1</div>
-          <h3>商品を選択</h3>
-          <p class="small">サイズと数量を選んでフォームへ進みます。</p>
+          <h3>Select</h3>
+          <p class="small">商品サイズと数量を選び、フォームへ進みます。</p>
         </article>
         <article class="step">
           <div class="step-no">2</div>
-          <h3>フォーム送信</h3>
+          <h3>Send</h3>
           <p class="small">会社情報・担当者・納品先を入力して送信します。</p>
         </article>
         <article class="step">
           <div class="step-no">3</div>
-          <h3>社内通知</h3>
-          <p class="small">注文内容がメールで届き、スプレッドシートにも保存されます。</p>
+          <h3>Notify</h3>
+          <p class="small">注文内容がメール通知され、社内で一覧管理できます。</p>
         </article>
         <article class="step">
           <div class="step-no">4</div>
-          <h3>納品書作成</h3>
-          <p class="small">GASで納品書PDFを自動生成し、管理に回せます。</p>
+          <h3>Create PDF</h3>
+          <p class="small">GAS連携で納品書PDFを自動生成し、実運用へつなげます。</p>
         </article>
       </div>
     </div>
@@ -696,8 +834,9 @@
   <section class="section order-section" id="order">
     <div class="wrap order-grid">
       <aside class="contact-card">
+        <div class="tagline">Contact / Order</div>
         <h3>ご注文・ご相談</h3>
-        <p>サンプル請求や継続納品のご相談も可能です。まずはこのフォームをベースに、実運用に合わせて拡張できます。</p>
+        <p>サンプル請求や継続納品の相談にも対応できる前提の構成です。まずはこのフォームを起点に実運用へつなげます。</p>
 
         <div class="contact-list">
           <div class="contact-item">
@@ -705,8 +844,8 @@
             ケース注文 / サンプル相談 / 継続納品相談
           </div>
           <div class="contact-item">
-            <b>納品書処理</b>
-            ご注文後、社内で納品書PDFを自動生成
+            <b>社内処理</b>
+            ご注文後、社内通知・納品書PDF自動化へ接続可能
           </div>
           <div class="contact-item">
             <b>連絡先</b>
@@ -716,8 +855,9 @@
       </aside>
 
       <div class="form-card">
+        <div class="tagline">Input Form</div>
         <h3>注文フォーム</h3>
-        <p class="meta">下の <code>YOUR_GAS_WEBAPP_URL</code> を、Apps ScriptのURLに差し替えると送信できるようになります。</p>
+        <p class="meta">下の <code>YOUR_GAS_WEBAPP_URL</code> をApps ScriptのURLに差し替えると送信できるようになります。</p>
 
         <form class="order-form" method="POST" action="YOUR_GAS_WEBAPP_URL">
           <div class="grid-2">
@@ -779,8 +919,8 @@
   <footer class="footer">
     <div class="wrap footer-grid">
       <div>
-        <strong>Arcalink リサイクルゴミ袋</strong><br>
-        <small>オレンジとブラックを基調にした法人向けリサイクル製品サイト</small>
+        <strong>Arcalink Recycle Bag</strong><br>
+        <small>Orange & Black / B2B recycle product site</small>
       </div>
       <small>© Arcalink</small>
     </div>
@@ -803,15 +943,14 @@
       const price = productPrices[selectedProduct] || 0;
       const qty = Number(quantity.value || 0);
       const total = price * qty;
-
       unitPrice.value = price;
       totalAmount.value = total;
     }
 
     productName.addEventListener("change", updatePrice);
     quantity.addEventListener("input", updatePrice);
-
     updatePrice();
   </script>
 </body>
 </html>
+```
